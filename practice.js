@@ -9,4 +9,13 @@ const work = () => {
     const getNumber = prompt("please type a number");
     const result = parseInt(getNumber) + 200;
     alert(result);
+
+}
+
+const show = () => {
+    const con = confirm('do you want to see the secret number?')
+    const num = 12345;
+    if(con){
+        alert(num)
+    }
 }
