@@ -10,7 +10,14 @@ const addItem = () => {
 
 const add = (value) => {
     const item = document.createElement('li');
-    item.innerText = value;
+    const cart = getCart();
+    let num;
+    if(!cart[value]){
+        num = 1;
+    }else{
+        num = cart[value] + 1
+    }
+    item.innerText = `${value} ${num}`;
     const list = document.getElementById('list');
     list.appendChild(item);
     setItem(value);
@@ -29,8 +36,11 @@ const getCart = () => {
 
 const setItem = name => {
     const cart = getCart();
-    const cartcheck = JSON.stringify(cart);
-    cart[name] = 1;
+    if(cart[name]){
+        cart[name] += 1;
+    }else{
+        cart[name] = 1;
+    }
     const stringified = JSON.stringify(cart);
     localStorage.setItem('cart', stringified);
 }
@@ -54,8 +64,6 @@ const prevCart = () => {
 prevCart()
 
 const placeOrder = () => {
-    const ul = document.getElementById('list');
-    ul.innerHTML = '';
-    localStorage.removeItem('cart');
-    
+    document.getElementById('list').textContent= '';
+    localStorage.removeItem('cart');   
 }
